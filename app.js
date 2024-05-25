@@ -7,6 +7,8 @@ const cors = require("cors");
 const app = express();
 const passport = require("passport");
 const { passportLocal, passportJwt } = require("./middlewares/passport");
+const dotenv = require("dotenv");
+dotenv.config();
 
 // middlewares before
 app.use(express.json());
@@ -32,8 +34,8 @@ app.use((req, res, next) => {
 
 initializeDatabase()
   .then(() => {
-    app.listen(5001, () => {
-      console.log("Server is running in port 5000");
+    app.listen(process.env.PORT, () => {
+      console.log("Server is running in PORT", process.env.PORT);
     });
   })
   .catch((error) => {
